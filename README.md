@@ -9,11 +9,12 @@ Guía de estilos para Jade, JS, CSS
 - Atributos en cada línea sin , de separación y ordenados alfabéticamente.
 - div omitidos si hay id o class.
 
-
+```
     input.button(
         placeholder='input'
         type='text'
     )
+```
 
 #### *JS*
 - Declaración de variables una por línea precedida de var(const o let).
@@ -24,37 +25,38 @@ Guía de estilos para Jade, JS, CSS
 - Declarar las variables cuando donde son necesarias, no declararlas todas arriba.
 - Espacios para separar -> = : { ( && || > = < y siguiente atributo
 
-
+```
     var fnsNums = {
         total: 0,
-        
+
         numeros: function (num1, num2, obj) {
             if (num1 > num2) {
                 obj.txt = 'El primer número es mayor';
             } else {
                 obj.txt = 'El segundo número es mayor';
             }
-            
+
             this.total += num1 + num2;
-            
+
             return this;
         }
     };
-        
+
     var num1 = 5;
     var num2 = 10;
     var num3 = 20;
     var num4 = 15;
     var obj1 = {};
     var obj2 = {};
-        
+
     fnsNums
     .numeros(num1, num2, obj1)
     .numeros(num3, num4, obj2);
-        
+
     console.log(obj1.txt);
     console.log(obj2.txt);
     console.log('El total de los números sumados es ' + fnsNums.total);
+```
 
 #### *CSS*
 - Cada propiedad en una línea.
@@ -63,7 +65,7 @@ Guía de estilos para Jade, JS, CSS
 - Un espacio entre el nombre y la {.
 - Un espacio entre : y el valor.
 
-
+```
     .texto {
         background-color: #ddd;
         color: #333;
@@ -72,3 +74,4 @@ Guía de estilos para Jade, JS, CSS
     .centrar {
         text-align: center;
     }
+```
