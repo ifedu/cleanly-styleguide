@@ -27,7 +27,7 @@ Guía de estilos para Jade, JS, CSS
 
     var fnsNums = {
         total: 0,
-
+        
         numeros: function (num1, num2, obj) {
             if (num1 > num2) {
                 obj.txt = 'El primer número es mayor';
@@ -40,18 +40,18 @@ Guía de estilos para Jade, JS, CSS
             return this;
         }
     };
-
+        
     var num1 = 5;
     var num2 = 10;
     var num3 = 20;
     var num4 = 15;
     var obj1 = {};
     var obj2 = {};
-
+        
     fnsNums
     .numeros(num1, num2, obj1)
     .numeros(num3, num4, obj2);
-
+        
     console.log(obj1.txt);
     console.log(obj2.txt);
     console.log('El total de los números sumados es ' + fnsNums.total);
@@ -68,7 +68,7 @@ Guía de estilos para Jade, JS, CSS
         background-color: #ddd;
         color: #333;
     }
-
+        
     .centrar {
         text-align: center;
     }
