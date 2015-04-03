@@ -1,0 +1,31 @@
+include mixins/mixins
+doctype html
+html(
+    lang='es'
+    ng-app='guideStyleCleanly'
+    ng-controller='ParentCtrl as parentCtrl'
+)
+    head
+        meta(charset='utf-8')
+        title Guide Style Cleanly
+        meta(
+            content=''
+            name='description'
+        )
+        link(
+            href='favicon.ico'
+            rel='shortcut icon'
+        )
+        link(
+            href='styles/main.css'
+            rel='stylesheet'
+        )
+    body
+        div(ui-view)
+
+        // build:js js/all.js
+        // bower:js
+        // endbower
+        script(src='js/index.js')
+        script(src='js/controllers/parent.controller.js')
+        // endbuild
