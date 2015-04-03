@@ -28,22 +28,22 @@ gulp.task('require-dir-gulp', function() {
     });
 });
 
-gulp.task('compileDist', function(cb) {
-    runSequence('build', 'preparedist', cb);
-});
-
 gulp.task('compileGulp', function(cb) {
     runSequence('delete-gulp', 'compile-gulp-es6', 'require-dir-gulp', cb);
 });
 
-gulp.task('compileRun', function (cb) {
-    runSequence('clean', 'scripts', 'copy', 'sass', 'jade', 'copy-jade', 'addDependencies', 'webserver', 'delete-tmp', cb);
+gulp.task('compileDist', function(cb) {
+    runSequence('clean', 'scripts', 'copy', 'rename-vendor-css', 'sass', 'jade', 'copy-jade', 'addDependencies', 'preparedist', cb);
 });
 
 gulp.task('compileGuide', function(cb) {
-    runSequence('clean', 'scripts', 'copy', 'sass', 'jade', 'copy-jade', 'build-guide', 'delete-tmp', cb);
+    runSequence('clean', 'scripts', 'copy', 'rename-vendor-css', 'sass', 'jade', 'copy-jade', 'build-guide', 'delete-tmp', cb);
+});
+
+gulp.task('compileRun', function (cb) {
+    runSequence('clean', 'scripts', 'copy', 'rename-vendor-css', 'sass', 'jade', 'copy-jade', 'addDependencies', 'webserver', 'delete-tmp', cb);
 });
 
 gulp.task('compileTest', function (cb) {
-    runSequence('clean', 'scripts', 'copy', 'sass', 'jade', 'copy-jade', 'addDependencies', 'karmaTmp', 'delete-tmp', cb);
+    runSequence('clean', 'scripts', 'copy', 'rename-vendor-css', 'sass', 'jade', 'copy-jade', 'addDependencies', 'karmaTmp', 'delete-tmp', cb);
 });

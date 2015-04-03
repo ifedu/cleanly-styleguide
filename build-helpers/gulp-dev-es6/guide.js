@@ -29,7 +29,7 @@ gulp.task('jade-guide', () =>
 gulp.task('addDependencies-guide', () =>
     gulp.src('./build/guide.html')
     .pipe(wiredep({
-        directory: './build/lib',
+        directory: './build/vendor',
         exclude: ['angular-mocks']
     }))
     .pipe(gulp.dest('./build'))

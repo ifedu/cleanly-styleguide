@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
 
-gulp.watch('./src/**/*.jade', () => runSequence('jade', 'addDependencies'));
+gulp.watch('./src/**/*.jade', () => runSequence('jade', 'copy-jade', 'addDependencies'));
 
 gulp.watch('./src/**/*.js', ['scripts']);
 gulp.watch('./src/**/*.scss', ['sass']);
