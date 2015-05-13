@@ -1,7 +1,6 @@
 *.sublime-project
 *.sublime-workspace
+.sass-cache/
+deploy/
 node_modules/
 vendor/
-build/
-build-helpers/gulp/
-.sass-cache/

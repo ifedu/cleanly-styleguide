@@ -1,6 +1,4 @@
-'use strict'
-
-module.exports = function(config) {
+module.exports = function (config) {
     config.set({
         autoWatch: false,
         basePath: 'build/',
@@ -34,5 +32,5 @@ module.exports = function(config) {
         },
         reporters: ['progress', 'coverage'],
         singleRun: true
-    });
-};
+    })
+}
