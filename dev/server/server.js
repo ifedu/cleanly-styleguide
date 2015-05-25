@@ -1,11 +1,11 @@
-module.exports = ($, src) => {
+module.exports = ($) => {
     const express = require('express')
 
     const app = express()
 
-    app.use(express.static(src.deploy.app.dir.public))
+    app.use(express.static($.deploy.public))
 
-    app.use('/*', (req, res) => res.sendFile(src.deploy.app.file.htmlIndex))
+    app.use('/*', (req, res) => res.sendFile($.deploy.index))
 
     const server = require('http').Server(app)
 

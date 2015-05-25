@@ -1,2 +1,2 @@
-module.exports = ($, src) =>
-    $.gulp.task('webserver', () => require(src.deploy.gulp.file.serverFile)($, src))
+module.exports = ($) =>
+    $.gulp.task('webserver', () => require(`../../${$.deploy.server}/server.js`)($))

@@ -1,8 +1,10 @@
-module.exports = ($, src) =>
+module.exports = ($) =>
     $.gulp.task('addDependencies', () =>
-        $.gulp.src(src.deploy.app.file.htmlIndex)
+        $.gulp
+        .src($.deploy.index)
         .pipe($.wiredep({
-            directory: src.deploy.app.dir.vendor
+            directory: $.deploy.vendor,
+            exclude: ['angular-mocks']
         }))
-        .pipe($.gulp.dest(src.deploy.app.dir.public))
+        .pipe($.gulp.dest($.deploy.public))
     )

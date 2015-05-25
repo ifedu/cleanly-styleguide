@@ -1,9 +1,9 @@
-module.exports = ($, src) =>
+module.exports = ($) =>
     $.gulp.task('clean', (cb) =>
         $.del([
-            src.deploy.app.dir.public,
-            src.deploy.app.dir.serverDir,
-            src.deploy.app.dir.tmp
+            $.deploy.public,
+            $.deploy.tmp,
+            $.deploy.tmpWrap
         ], {
             force: true
         }, cb)

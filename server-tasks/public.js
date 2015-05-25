@@ -1,21 +1,21 @@
-module.exports = function ($, src) {
+module.exports = function ($) {
     'use strict';
 
     $.gulp.task('deleteGulp', function (cb) {
-        return $.del(src.deploy.gulp.dir.dynamic, {
+        return $.del($.deploy.serverTasks, {
             force: true
         }, cb);
     });
 
     $.gulp.task('compileGulpEs6', function (cb) {
-        return $.gulp.src(src.dev.gulp.file.dynamic)
-        .pipe($.changed(src.deploy.gulp.dir.dynamic))
+        return $.gulp.src($.dev.serverTasks + '/**/*.js')
+        .pipe($.changed($.deploy.serverTasks))
         .pipe($.babel())
-        .pipe($.gulp.dest(src.deploy.gulp.dir.dynamic));
+        .pipe($.gulp.dest($.deploy.serverTasks));
     });
 
     $.gulp.task('readFolder', function () {
-        $.fn.readFolder(src.deploy.gulp.dir.dynamic);
+        $.fn.readFolder($.deploy.serverTasks);
     });
 
     $.gulp.task('compile', function (cb) {

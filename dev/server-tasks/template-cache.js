@@ -1,8 +1,8 @@
-module.exports = ($, src) =>
+module.exports = ($) =>
     $.gulp.task('templateCache', (done) =>
-        $.gulp.src(src.deploy.app.file.htmlDirectives)
-        .pipe($.templateCache(src.deploy.app.file.tpl, {
+        $.gulp.src([`${$.dev.public}/**/directives/**/*.html`])
+        .pipe($.templateCache('templates.js', {
             standalone: true
         }))
-        .pipe($.gulp.dest(src.deploy.app.dir.js))
+        .pipe($.gulp.dest($.deploy.js))
     )

@@ -1,66 +1,57 @@
-var deployPublic = './deploy/public';
-var devPublic = './dev/public';
-var tmp = './deploy/tmp';
+var $ = {
+    babel: require('gulp-babel'),
+    changed: require('gulp-changed'),
+    data: require('gulp-data'),
+    del: require('del'),
+    fs: require('fs'),
+    gulp: require('gulp'),
+    gulpRimraf: require('gulp-rimraf'),
+    jade: require('gulp-jade'),
+    ngAnnotate: require('gulp-ng-annotate'),
+    path:require('path'),
+    rimraf: require('rimraf'),
+    runSequence: require('run-sequence'),
+    stylus: require('gulp-stylus'),
+    templateCache: require('gulp-angular-templatecache'),
+    wiredep: require('wiredep').stream,
+    wrap: require('gulp-wrap'),
 
-module.exports = {
-    deploy : {
-        app: {
-            dir: {
-                assets: deployPublic + '/assets',
-                js: deployPublic + '/js',
-                public: deployPublic,
-                server: 'server',
-                serverDir: 'deploy/server',
-                stylus: deployPublic + '/css',
-                tmp: tmp,
-                vendor: deployPublic + '/vendor'
-            },
-            file: {
-                htmlDirectives: [deployPublic + '/**/directives/**/*.html'],
-                htmlIndex: deployPublic + '/index.html',
-                jsPublics: [
-                    tmp + '/**/*.js',
-                    '!' + tmp + '/**/*.data.js',
-                    '!' + tmp + '/**/*.spec.js'
-                ],
-                tmpJs: tmp + '/js',
-                tpl: 'templates.js',
-                tplWithDir: deployPublic + '/js/templates.js'
-            }
-        },
-        guide: {},
-        gulp: {
-            dir: {
-                dynamic: './deploy/server-tasks',
-                server: './deploy/server'
-            },
-            file: {
-                serverFile: './../server/server.js'
-            }
-        }
-    },
+    serverTasks: './server-tasks',
+    vendor: './vendor',
+
     dev: {
-        app: {
-            file: {
-                assets: devPublic + '/assets/**/*',
-                jade: [
-                    devPublic + '/**/*.jade',
-                    '!' + devPublic + '/**/mixins/*.jade'
-                ],
-                js: [devPublic + '/**/*.js'],
-                stylus: devPublic + '/styles/main.styl',
-                vendor: './vendor/**/*'
-            }
-        },
-        guide: {},
-        gulp: {
-            dir: {
-                init: './server-tasks'
-            },
-            file: {
-                dynamic: ['./dev/server-tasks/*'],
-                server: ['./dev/server/**/*']
-            }
-        }
+        assets: './dev/public/assets',
+        public: './dev/public',
+        server: './dev/server',
+        serverTasks: './dev/server-tasks',
+        stylus: './dev/public/styles'
+    },
+
+    deploy: {
+        assets: './deploy/public/assets',
+        index: './deploy/public/index.html',
+        js: './deploy/public/js',
+        public: './deploy/public',
+        server: './deploy/server',
+        serverTasks: './deploy/server-tasks',
+        stylus: './deploy/public/styles',
+        tmp: './deploy/tmp',
+        tmpJs: './deploy/tmp/js',
+        tmpWrap: './deploy/tmp-wrap',
+        vendor: './deploy/public/vendor'
     }
-}
+};
+
+$.fn = {
+    readFolder: function (folder) {
+        var path = require('path').join(__dirname, folder);
+
+        var files = require('fs').readdirSync(path);
+
+        files.forEach(function (file) {
+            require('./' + folder + '/' + file)($);
+        });
+    }
+};
+
+module.exports = $;

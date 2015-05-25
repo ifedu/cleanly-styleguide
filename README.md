@@ -42,7 +42,7 @@
     - http://google-styleguide.googlecode.com
     - https://github.com/airbnb/javascript/blob/master/README.md
 
-### *Librerías usadas*
+### Librerías usadas
     - Gulp
         - Automatizador de tareas
         - BabelJs
@@ -55,6 +55,16 @@
         - Servidor en NodeJs
     - Mongodb
         - Base de datos no relacional
+
+### Tareas de gulp
+    - gulp run
+        - Compila el proyecto en /dev y lo lanza
+    - gulp guide
+        - Compila el proyecyo y la guía en /dev y /guide y lanza la guía
+    - gulp test
+        - Compila el proyecto y lanza los test unitarios
+    - gulp dist
+        - Minifica el proyecto en /dist y lo lanza
 
 **[Indice](#indice)**
 

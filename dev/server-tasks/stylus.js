@@ -1,6 +1,9 @@
-module.exports = ($, src) =>
+module.exports = ($) =>
     $.gulp.task('stylus', () =>
-        $.gulp.src(src.dev.app.file.stylus)
-        .pipe($.stylus())
-        .pipe($.gulp.dest(src.deploy.app.dir.stylus))
+        $.gulp
+        .src(`${$.dev.stylus}/*.styl`)
+        .pipe($.stylus({
+            linenos: true
+        }))
+        .pipe($.gulp.dest($.deploy.stylus))
     )
