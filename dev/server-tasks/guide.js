@@ -1,82 +1,64 @@
-module.exports = ($, src) => {}
-// const CONFIG = {
-//     basedir: './src-guide/'
-// };
+$.gulp.task('jade-guide', () =>
+    $.gulp
+    .src([
+        `${$.dev.guide}/**/*.jade`,
+        `${$.dev.public}/guide.jade`,
+        `!${$.dev.guide}/**/mixins/*.jade`
+    ])
+    .pipe($.data($.fn.jsonJade))
+    .pipe($.jade({
+        pretty: true
+    }))
+    .on('error', (error) => {
+        console.log(error);
+    })
+    .pipe($.gulp.dest($.deploy.public))
+)
 
-// var babel = require('gulp-babel');
-// var changed = require('gulp-changed');
-// var debug = require('gulp-debug');
-// var gulp = require('gulp');
-// var jade = require('gulp-jade');
-// var jadeInheritance = require('gulp-jade-inheritance');
-// var jshint = require('gulp-jshint');
-// var ngAnnotate = require('gulp-ng-annotate');
-// var rimraf = require('rimraf');
-// var runSequence = require('run-sequence');
-// var sass = require('gulp-ruby-sass');
-// var webserver = require('gulp-webserver');
-// var wiredep = require('wiredep').stream;
+$.gulp.task('scripts-js-guide', () =>
+    $.gulp
+    .src([
+        `${$.dev.guide}/**/*.js`,
+        `!${$.dev.public}/guide.data.js`,
+    ])
+    .pipe($.changed($.deploy.guide))
+    .pipe($.wrap(
+        `(function () {
+            <%= contents %>
+        })();`
+    ))
+    .pipe($.gulp.dest($.deploy.guide))
+    .pipe($.babel())
+    .pipe($.gulp.dest($.deploy.guide))
+    .pipe($.ngAnnotate())
+    .pipe($.gulp.dest($.deploy.guide))
+)
 
-// gulp.task('jade-guide', () =>
-//     gulp.src(['./src-guide/**/*.jade'])
-//     .pipe(changed('./build'))
-//     .pipe(jadeInheritance(CONFIG))
-//     .pipe(jade({
-//         pretty: true
-//     }))
-//     .pipe(gulp.dest('./build'))
-// );
+$.gulp.task('stylus-guide', () =>
+    $.gulp
+    .src(`${$.dev.guide}/*.styl`)
+    .pipe($.stylus({
+        linenos: true
+    }))
+    .pipe($.gulp.dest($.deploy.guide))
+)
 
-// gulp.task('addDependencies-guide', () =>
-//     gulp.src('./build/guide.html')
-//     .pipe(wiredep({
-//         directory: './build/vendor',
-//         exclude: ['angular-mocks']
-//     }))
-//     .pipe(gulp.dest('./build'))
-// );
+$.gulp.task('addDependencies-guide', () =>
+    $.gulp
+    .src(`./${$.deploy.guideIndex}`)
+    .pipe($.wiredep({
+        directory: $.deploy.vendor,
+        exclude: ['angular-mocks']
+    }))
+    .pipe($.gulp.dest($.deploy.public))
+)
 
-// gulp.task('scripts-tmp-guide', () =>
-//     gulp.src(['./src-guide/**/*.js'])
-//     .pipe(changed('./build'))
-//     .pipe(babel())
-//     .pipe(gulp.dest('./tmp/guide'))
-// );
+$.gulp.task('webserver-guide', () => require(`../../${$.deploy.server}/server-guide.js`)($))
 
-// gulp.task('scripts-build-guide', () =>
-//     gulp.src(['./tmp/guide/**/*.js', '!./tmp/guide/**/*.spec.js'])
-//     .pipe(jshint('.jshintrc'))
-//     .pipe(jshint.reporter('default', {
-//         verbose: true
-//     }))
-//     .pipe(debug())
-//     .pipe(ngAnnotate())
-//     .pipe(gulp.dest('./build'))
-// );
+$.gulp.task('guideTask', (cb) => $.runSequence(['jade-guide', 'scripts-js-guide', 'stylus-guide'], 'addDependencies-guide', 'webserver-guide', cb))
 
-// gulp.task('sass-guide', () =>
-//     sass('./src-guide', {
-//         style: 'expanded',
-//         lineNumbers: true
-//     })
-//     .on('error', (error) => {
-//         console.log(error.message);
-//     })
-//     .pipe(gulp.dest('./build'))
-// );
-
-// gulp.task('webserver-guide', () =>
-//     gulp.src('./build')
-//     .pipe(webserver({
-//         livereload: true,
-//         directoryListing: false,
-//         open: 'http://localhost:8003/guide.html',
-//         port: '8003'
-//     }))
-// );
-
-// gulp.task('build-guide', (cb) => runSequence('jade-guide', 'addDependencies-guide', 'scripts-tmp-guide', 'scripts-build-guide', 'sass-guide', 'webserver-guide', cb));
-
-// gulp.watch('./src-guide/**/*.jade', () => runSequence('jade-guide', 'addDependencies-guide'));
-// gulp.watch('./src-guide/**/*.js', () => runSequence('scripts-tmp-guide', 'scripts-build-guide'));
-// gulp.watch('./src-guide/**/*.scss', ['sass-guide']);
+$.gulp.watch([
+    `${$.dev.guide}/**/*.jade`,
+    `${$.dev.public}/**/guide.jade`
+], () => $.runSequence('jade-guide', 'addDependencies-guide'))
+$.gulp.watch(`${$.dev.guide}/**/*.js`, ['scripts-js-guide'])

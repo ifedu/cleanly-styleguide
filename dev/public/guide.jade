@@ -1,0 +1,31 @@
+link(
+    href="guide/main.css"
+    rel="stylesheet"
+)
+
+include index
+
+script(src='guide/main.js')
+
+.container(ng-controller='GuideCtrl as guideCtrl')
+    .row.text-center
+        button.col-6.btn.btn-primary(ng-click='guideCtrl.view("js-directives")') JS Directives
+        button.col-6.btn.btn-primary(ng-click='guideCtrl.view("js-filters")') JS Filters
+        button.col-6.btn.btn-primary(ng-click='guideCtrl.view("jade-mixins")') Jade Mixins
+        button.col-6.btn.btn-primary(ng-click='guideCtrl.view("css")') CSS
+
+    .row(ng-if='guideCtrl.selection === "js-directives"')
+        .col-12.text-center JS Directives
+        include guide/mixins/js-directives
+
+    .row(ng-if='guideCtrl.selection === "js-filters"')
+        .col-12.text-center JS Filters
+        include guide/mixins/js-filters
+
+    .row(ng-if='guideCtrl.selection === "jade-mixins"')
+        .col-12.text-center Jade Mixins
+        include guide/mixins/jade-mixins
+
+    .row(ng-if='guideCtrl.selection === "css"')
+        .col-12.text-center CSS
+        include guide/mixins/css

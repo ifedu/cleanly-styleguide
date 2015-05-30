@@ -1,9 +1,15 @@
-module.exports = ($, src) => {}
-// var gulp = require('gulp');
-// var runSequence = require('run-sequence');
+$.gulp.watch([
+    `${$.dev.public}/**/*.jade`,
+    `!${$.dev.public}/guide.jade`
+], () => $.runSequence('jade', 'templateCache', 'addDependencies'))
 
-// gulp.watch('./src/**/*.jade', () => runSequence('jade', 'copy-jade', 'addDependencies'));
-
-// gulp.watch('./src/**/*.js', ['scripts']);
-// gulp.watch('./src/**/*.scss', ['sass']);
-// gulp.watch('./build-helpers/gulp-dev-es6/*.js', ['compile']);
+$.gulp.watch([
+    `${$.dev.public}/app/**/*.js`,
+    `${$.dev.public}/js/**/*.js`,
+    `!${$.dev.public}/app/**/*.config.js`,
+    `!${$.dev.public}/app/**/*.spec.js`,
+    `!${$.dev.public}/js/**/*.config.js`,
+    `!${$.dev.public}/js/**/*.spec.js`
+], ['scripts'])
+$.gulp.watch(`${$.dev.public}/**/*.styl`, ['stylus'])
+$.gulp.watch(`${$.dev.serverTasks}/*.js`, ['compile'])

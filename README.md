@@ -1,4 +1,3 @@
-# styleguide-web
 # Plantilla para iniciación de un proyecto. 
 # Guía de estilos para Jade, Stylus, JS(ES6)
 
@@ -408,19 +407,19 @@ const nombre = 'Edu',
 console.log(lugar.pais)
 
 // BIEN
-const apellido = 'Pérez'
-const edad = 31
-const nombre = 'Edu'
-
-const lugar = {
-    ciudad: 'Madrid',
-    comunidad: 'Madrid'
-    pais: 'España',
-}
+const APELLIDO = 'Pérez'
+const EDAD = 31
+const NOMBRE = 'Edu'
 
 const cara = {
     ojos: 'marrones',
     pelo: 'negro'
+}
+
+const lugar = {
+    ciudad: 'Madrid',
+    comunidad: 'Madrid',
+    pais: 'España'
 }
 
 console.log(lugar.pais)

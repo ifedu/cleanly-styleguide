@@ -5,14 +5,16 @@ var $ = {
     del: require('del'),
     fs: require('fs'),
     gulp: require('gulp'),
-    gulpRimraf: require('gulp-rimraf'),
+    inject: require('gulp-inject'),
     jade: require('gulp-jade'),
+    karma: require('karma').server,
     ngAnnotate: require('gulp-ng-annotate'),
     path:require('path'),
-    rimraf: require('rimraf'),
     runSequence: require('run-sequence'),
     stylus: require('gulp-stylus'),
     templateCache: require('gulp-angular-templatecache'),
+    uglify: require('gulp-uglify'),
+    useref: require('gulp-useref'),
     wiredep: require('wiredep').stream,
     wrap: require('gulp-wrap'),
 
@@ -21,6 +23,7 @@ var $ = {
 
     dev: {
         assets: './dev/public/assets',
+        guide: './dev/public/guide',
         public: './dev/public',
         server: './dev/server',
         serverTasks: './dev/server-tasks',
@@ -28,7 +31,10 @@ var $ = {
     },
 
     deploy: {
+        app: './deploy/public/app',
         assets: './deploy/public/assets',
+        guide: './deploy/public/guide',
+        guideIndex: './deploy/public/guide.html',
         index: './deploy/public/index.html',
         js: './deploy/public/js',
         public: './deploy/public',
@@ -37,12 +43,34 @@ var $ = {
         stylus: './deploy/public/styles',
         tmp: './deploy/tmp',
         tmpJs: './deploy/tmp/js',
-        tmpWrap: './deploy/tmp-wrap',
         vendor: './deploy/public/vendor'
+    },
+
+    dist: {
+        allJs: './public-dist/js/all.js',
+        index: './public-dist/index.html',
+        js: './public-dist/js',
+        public: './public-dist',
+        stylus: './public-dist/styles',
+        vendor: './public-dist/vendor'
     }
 };
 
 $.fn = {
+    jsonJade: function (file) {
+        var NAME = file.path;
+
+        var FILEJADE = $.path.basename(NAME, '.jade');
+
+        var dirname = $.path.dirname(NAME);
+
+        dirname = dirname.replace($.path.sep + 'src' + $.path.sep, $.path.sep + 'tmp' + $.path.sep);
+
+        var route = $.path.resolve(__dirname, dirname, FILEJADE + '.data.js');
+
+        return ($.fs.existsSync(route)) ? require(route) : {};
+    },
+
     readFolder: function (folder) {
         var path = require('path').join(__dirname, folder);
 

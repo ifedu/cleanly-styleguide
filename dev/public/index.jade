@@ -2,39 +2,71 @@ include views/mixins/mixins
 doctype html
 html(
     lang='es'
-    ng-app='guideStyleCleanly'
+    ng-app='styleguideWeb'
     ng-controller='ParentCtrl as parentCtrl'
 )
     head
         meta(charset='utf-8')
-        title Guide Style Cleanly
+        title Styleguide Web
         meta(
             content=''
             name='description'
         )
-        link(
-            href='favicon.ico'
-            rel='shortcut icon'
-        )
+        //- link(
+        //-     href='favicon.ico'
+        //-     rel='shortcut icon'
+        //- )
         link(
             href='styles/main.css'
             rel='stylesheet'
         )
     body
-        .row
-            .col-xs-12.col-sm-6.col-md-8 col-xs-12.col-sm-6.col-md-8
-            .col-xs-6.col-md-4 .col-xs-6 .col-md-4
-        .row
-            .col-xs-6.col-sm-4 .col-xs-6 .col-sm-4
-            .col-xs-6.col-sm-4 .col-xs-6 .col-sm-4
-            <!-- Optional: clear the XS cols if their content doesn't match in height -->
-            .clearfix.visible-xs-block
-            .col-xs-6.col-sm-4 .col-xs-6 .col-sm-4
+        .main
+            .row
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+               .col-md-1 .col-md-1
+            .row
+              .col-md-8 .col-md-8
+              .col-md-4 .col-md-4
+            .row
+              .col-md-4 .col-md-4
+              .col-md-4 .col-md-4
+              .col-md-4 .col-md-4
+            .row
+              .col-md-6 .col-md-6
+              .col-md-6 .col-md-6
         div(ui-view)
 
-        // build:js js/all.js
-        // bower:js
-        // endbower
+        //
+            -->
+            <!-- build:js js/all.js -->
+            <!-- bower:js -->
+            <!-- endbower -->
+            <!--
         script(src='js/index.js')
-        script(src='js/controllers/parent.controller.js')
-        // endbuild
+        //
+            -->
+            <!--
+        script(src='js/services/lazy.js')
+        //
+            -->
+            <!--
+        script(src='js/controllers/parent.ctrl.js')
+        //
+            -->
+            <!--
+        script(src='app/home/routes.js')
+        //
+            -->
+            <!-- endbuild -->
+            <!--

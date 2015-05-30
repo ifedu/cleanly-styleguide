@@ -9,11 +9,11 @@ module.exports = ($) => {
 
     const server = require('http').Server(app)
 
-    const PORT = '8002'
+    const PORT = '8003'
 
     server.listen(PORT, () => console.log('Listening on port %d', server.address().port))
 
     const open = require('open')
 
-    open(`http://localhost:${PORT}`)
+    open(`http://localhost:${PORT}/guide.html`)
 }

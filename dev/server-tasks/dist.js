@@ -1,95 +1,78 @@
-module.exports = ($, src) => {}
-// var conventionalChangelog = require('conventional-changelog');
-// var filter = require('gulp-filter');
-// var fs = require('fs');
-// var gulp = require('gulp');
-// var htmlmin = require('gulp-htmlmin');
-// var minifyCSS = require('gulp-minify-css');
-// var path = require('path');
-// var rimraf = require('gulp-rimraf');
-// var runSequence = require('run-sequence');
-// var useref = require('gulp-useref');
+$.gulp.task('jade-min', () =>
+    $.gulp
+    .src([
+        `${$.dev.public}/**/*.jade`,
+        `!${$.dev.public}/**/mixins/*.jade`,
 
-// const BUILD_FOLDER = 'build';
-// const DIST_FOLDER = './dist';
-// const VENDOR_FOLDER = 'vendor';
+        `!${$.dev.guide}/**/*.jade`,
+        `!${$.dev.public}/guide.jade`
+    ])
+    .pipe($.data($.fn.jsonJade))
+    .pipe($.jade({
+        pretty: false
+    }))
+    .on('error', (error) => {
+        console.log(error);
+    })
+    .pipe($.gulp.dest($.dist.public))
+)
 
-// gulp.task('cleandist', () => {
-//     gulp.src(DIST_FOLDER, {
-//         read: false
-//     })
-//     .pipe(rimraf())
-// });
+$.gulp.task('stylus-min', () =>
+    $.gulp
+    .src(`${$.dev.stylus}/*.styl`)
+    .pipe($.stylus({
+        compress: true
+    }))
+    .pipe($.gulp.dest($.dist.stylus))
+)
 
-// gulp.task('generateOneScriptFile', (done) => {
-//     var assets = useref.assets({
-//         searchPath: './' + BUILD_FOLDER
-//     });
+$.gulp.task('copyDeploy', (done) =>
+    $.gulp
+    .src([
+        `${$.deploy.public}/**/*.*`,
+        `${$.deploy.vendor}/**/*.*`
+    ])
+    .pipe($.gulp.dest($.dist.public))
+)
 
-//     gulp.src('./' + BUILD_FOLDER + '/index.html')
-//     .pipe(assets)
-//     .pipe(assets.restore())
-//     .pipe(useref())
-//     .pipe(gulp.dest(DIST_FOLDER))
-// });
+$.gulp.task('addDependencies-dist', () =>
+    $.gulp
+    .src(`./${$.dist.index}`)
+    .pipe($.wiredep({
+        directory: $.dist.vendor,
+        exclude: ['angular-mocks']
+    }))
+    .pipe($.gulp.dest($.dist.public))
+)
 
-// gulp.task('minifyHTML', (done) => {
-//     gulp.src(DIST_FOLDER + '/**/*.html')
-//     .pipe(htmlmin({
-//         collapseWhitespace: true
-//     }))
-//     .pipe(gulp.dest(DIST_FOLDER))
-// });
+$.gulp.task('generateOneScriptFile', (done) => {
+    const assets = $.useref.assets()
 
+    return $.gulp
+    .src($.dist.index)
+    .pipe(assets)
+    .pipe(assets.restore())
+    .pipe($.useref())
+    .pipe($.gulp.dest($.dist.public))
+})
 
-// gulp.task('minifyCSS', (done) => {
-//     gulp.src(DIST_FOLDER + '/**/*.css')
-//     .pipe(minifyCSS())
-//     .pipe(gulp.dest(DIST_FOLDER))
-// });
+$.gulp.task('compress', () =>
+    $.gulp
+    .src($.dist.allJs)
+    .pipe($.uglify())
+    .pipe($.gulp.dest($.dist.js))
+)
 
-// gulp.task('copyvendor', () => {
-//     gulp.src('./' + VENDOR_FOLDER + "/**/*.*")
-//     .pipe(gulp.dest(DIST_FOLDER + '/' + VENDOR_FOLDER))
-// });
+$.gulp.task('clean-min', (cb) =>
+    $.del([
+        `${$.dist.js}/**/*`,
+        $.dist.vendor,
+        `!${$.dist.js}/all.js`
+    ], {
+        force: true
+    }, cb)
+)
 
-// gulp.task('copybuild', (done) => {
-//     gulp.src('./' + BUILD_FOLDER + '/**/*.*')
-//     .pipe(gulp.dest(DIST_FOLDER))
-// });
+$.gulp.task('webserver-dist', () => require(`../../${$.deploy.server}/server-dist.js`)($))
 
-// gulp.task('copyversion', (done) => {
-//     gulp.src('./version.txt')
-//     .pipe(gulp.dest(DIST_FOLDER))
-// });
-
-// gulp.task('changelog', (done) => {
-//     const saveChangelog = (err, log) => {
-//         if (err) {
-//             return done(err);
-//         }
-
-//         fs.writeFile('CHANGELOG.md', log, done);
-//     };
-
-//     fs.readFile('./package.json', 'utf8', (err, rawData) => {
-//         var data = JSON.parse(rawData);
-
-//         conventionalChangelog({
-//             repository: data.repository.url.replace('.git', ''),
-//             version: data.version
-//         }, saveChangelog);
-//     });
-// });
-
-// gulp.task('compiledist', (cb) => {
-//     runSequence('generateOneScriptFile', 'minifyHTML', cb);
-// });
-
-// gulp.task('copydist', (cb) => {
-//     runSequence('copybuild', 'copyvendor', 'copyversion', cb);
-// });
-
-// gulp.task('preparedist', (cb) => {
-//     runSequence('cleandist', 'copydist', 'generateOneScriptFile', 'minifyHTML', 'minifyCSS', cb);
-// });
+$.gulp.task('distTask', (cb) => $.runSequence('copyDeploy', 'addDependencies-dist', 'generateOneScriptFile', 'compress', 'clean-min', 'webserver-dist', cb))

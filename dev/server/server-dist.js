@@ -3,13 +3,13 @@ module.exports = ($) => {
 
     const app = express()
 
-    app.use(express.static($.deploy.public))
+    app.use(express.static($.dist.public))
 
-    app.use('/*', (req, res) => res.sendFile($.path.resolve(`${__dirname}../../${$.deploy.public}`)))
+    app.use('/*', (req, res) => res.sendFile($.path.resolve(`${__dirname}../../${$.dist.public}`)))
 
     const server = require('http').Server(app)
 
-    const PORT = '8002'
+    const PORT = '8001'
 
     server.listen(PORT, () => console.log('Listening on port %d', server.address().port))
 
