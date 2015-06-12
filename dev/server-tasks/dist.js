@@ -63,9 +63,16 @@ $.gulp.task('compress', () =>
     .pipe($.gulp.dest($.dist.js))
 )
 
+$.gulp.task('compress-app', () =>
+    $.gulp
+    .src(`${$.dist.app}/**/*.js`)
+    .pipe($.uglify())
+    .pipe($.gulp.dest($.dist.app))
+)
+
 $.gulp.task('clean-min', (cb) =>
     $.del([
-        `${$.dist.js}/**/*`,
+        `${$.dist.js}/**/*.js`,
         $.dist.vendor,
         `!${$.dist.js}/all.js`
     ], {
@@ -73,6 +80,14 @@ $.gulp.task('clean-min', (cb) =>
     }, cb)
 )
 
+$.gulp.task('templateCache-min', (done) =>
+    $.gulp.src([`${$.dist.public}/**/directives/**/*.html`])
+    .pipe($.templateCache('templates.js', {
+        standalone: true
+    }))
+    .pipe($.gulp.dest($.dist.js))
+)
+
 $.gulp.task('webserver-dist', () => require(`../../${$.deploy.server}/server-dist.js`)($))
 
-$.gulp.task('distTask', (cb) => $.runSequence('copyDeploy', 'addDependencies-dist', 'generateOneScriptFile', 'compress', 'clean-min', 'webserver-dist', cb))
+$.gulp.task('distTask', (cb) => $.runSequence('copyDeploy', 'addDependencies-dist', 'generateOneScriptFile', ['compress', 'compress-app'], 'clean-min', 'webserver-dist', cb))

@@ -34,6 +34,14 @@ $.gulp.task('scripts-js-guide', () =>
     .pipe($.gulp.dest($.deploy.guide))
 )
 
+$.gulp.task('scripts-js-guide-data', () =>
+    $.gulp
+    .src([`${$.dev.public}/guide.data.js`])
+    .pipe($.changed($.deploy.guide))
+    .pipe($.babel())
+    .pipe($.gulp.dest($.deploy.guide))
+)
+
 $.gulp.task('stylus-guide', () =>
     $.gulp
     .src(`${$.dev.guide}/*.styl`)
@@ -55,7 +63,7 @@ $.gulp.task('addDependencies-guide', () =>
 
 $.gulp.task('webserver-guide', () => require(`../../${$.deploy.server}/server-guide.js`)($))
 
-$.gulp.task('guideTask', (cb) => $.runSequence(['jade-guide', 'scripts-js-guide', 'stylus-guide'], 'addDependencies-guide', 'webserver-guide', cb))
+$.gulp.task('guideTask', (cb) => $.runSequence(['scripts-js-guide', 'scripts-js-guide-data', 'stylus-guide'], 'jade-guide', 'addDependencies-guide', 'webserver-guide', cb))
 
 $.gulp.watch([
     `${$.dev.guide}/**/*.jade`,

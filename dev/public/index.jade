@@ -45,28 +45,14 @@ html(
             .row
               .col-md-6 .col-md-6
               .col-md-6 .col-md-6
-        div(ui-view)
 
-        //
-            -->
-            <!-- build:js js/all.js -->
-            <!-- bower:js -->
-            <!-- endbower -->
-            <!--
-        script(src='js/index.js')
-        //
-            -->
-            <!--
-        script(src='js/services/lazy.js')
-        //
-            -->
-            <!--
-        script(src='js/controllers/parent.ctrl.js')
-        //
-            -->
-            <!--
-        script(src='app/home/routes.js')
-        //
-            -->
-            <!-- endbuild -->
-            <!--
+            div(ui-view)
+
+        +script-min-ini()
+
+        +script-min('js/index.js')
+        +script-min('js/services/lazy.js')
+        +script-min('js/controllers/parent.ctrl.js')
+        +script-min('app/home/routes.js')
+
+        +script-min-end()

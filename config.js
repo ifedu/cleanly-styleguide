@@ -13,11 +13,13 @@ var $ = {
     runSequence: require('run-sequence'),
     stylus: require('gulp-stylus'),
     templateCache: require('gulp-angular-templatecache'),
+    tinylr: require('tiny-lr')(),
     uglify: require('gulp-uglify'),
     useref: require('gulp-useref'),
     wiredep: require('wiredep').stream,
     wrap: require('gulp-wrap'),
 
+    plato: './analysis/plato',
     serverTasks: './server-tasks',
     vendor: './vendor',
 
@@ -48,6 +50,7 @@ var $ = {
 
     dist: {
         allJs: './public-dist/js/all.js',
+        app: './public-dist/app',
         index: './public-dist/index.html',
         js: './public-dist/js',
         public: './public-dist',
@@ -64,7 +67,7 @@ $.fn = {
 
         var dirname = $.path.dirname(NAME);
 
-        dirname = dirname.replace($.path.sep + 'src' + $.path.sep, $.path.sep + 'tmp' + $.path.sep);
+        dirname = dirname.replace($.path.sep + 'dev' + $.path.sep, $.path.sep + 'deploy' + $.path.sep);
 
         var route = $.path.resolve(__dirname, dirname, FILEJADE + '.data.js');
 

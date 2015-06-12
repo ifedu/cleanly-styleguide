@@ -24,13 +24,22 @@ module.exports = function ($) {
         $.fn.readFolder($.deploy.serverTasks);
     });
 
-    // COMPILES
+    //// COMPILES
     $.gulp.task('compile', function (cb) {
         $.runSequence('deleteGulp', 'compileGulpEs6', 'readFolder', cb);
     });
 
     $.gulp.task('compiledBase', function (cb) {
         $.runSequence('clean', ['scripts', 'stylus', 'jade'], 'copy', 'templateCache', cb);
+    });
+
+    // CODE
+    $.gulp.task('compiledAnalysis', function (cb) {
+        $.runSequence('compiledBase', 'addDependencies', 'analize', cb);
+    });
+
+    $.gulp.task('analysis', function (cb) {
+        $.runSequence('compile', 'compiledAnalysis', cb);
     });
 
     // DIST

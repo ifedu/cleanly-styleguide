@@ -1,13 +1,15 @@
 module.exports = ($) => {
+    // ROUTES
     const express = require('express')
-
     const app = express()
 
     app.use(express.static($.deploy.public))
 
-    app.use('/*', (req, res) => res.sendFile($.path.resolve(`${__dirname}../../${$.deploy.public}`)))
+    app.use('/*', (req, res) => res.sendFile($.path.resolve(__dirname, `../../${$.deploy.public}`)))
 
-    const server = require('http').Server(app)
+    //SERVER
+    const http = require('http')
+    const server = http.Server(app)
 
     const PORT = '8003'
 

@@ -1,6 +1,7 @@
 *.sublime-project
 *.sublime-workspace
-.sass-cache/
+analysis/
 deploy/
 node_modules/
+public-dist/
 vendor/

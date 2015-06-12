@@ -1,5 +1,6 @@
 $.gulp.task('templateCache', (done) =>
-    $.gulp.src([`${$.dev.public}/**/directives/**/*.html`])
+    $.gulp
+    .src([`${$.deploy.public}/**/directives/**/*.html`])
     .pipe($.templateCache('templates.js', {
         standalone: true
     }))

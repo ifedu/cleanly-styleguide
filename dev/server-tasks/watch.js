@@ -1,3 +1,15 @@
+$.gulp.task('watch', () => {
+    $.gulp.watch([`${$.deploy.public}/**/*`], (event) => {
+        const FILE_NAME = $.path.relative(__dirname, event.path)
+
+        $.tinylr.changed({
+            body: {
+                files: [FILE_NAME]
+            }
+        })
+    })
+})
+
 $.gulp.watch([
     `${$.dev.public}/**/*.jade`,
     `!${$.dev.public}/guide.jade`

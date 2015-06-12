@@ -15,11 +15,19 @@ module.exports = function (config) {
 
         files: [
             'vendor/angular/angular.js',
-            'vendor/angular-mocks/angular-mocks.js',
             'vendor/angular-ui-router/release/angular-ui-router.min.js',
+            'vendor/angular-mocks/angular-mocks.js',
+            'vendor/script.js/dist/script.min.js',
+            'js/index.spec.js',
+            'js/templates.js',
             'js/index.js',
+            'js/constants.js',
+            'js/controllers/parent.controller.js',
+            'js/services/*.js',
+            'js/**/*.js',
             'app/**/*.js',
-            'js/**/*.js'
+            'app/**/*.html',
+            'js/directives/**/*.html'
         ],
 
         frameworks: [
@@ -42,8 +50,8 @@ module.exports = function (config) {
         }
     };
 
-    configKarma.browsers = ['Chrome'];
-    configKarma.singleRun = false;
+    // configKarma.browsers = ['Chrome'];
+    // configKarma.singleRun = false;
 
     config.set(configKarma);
 };

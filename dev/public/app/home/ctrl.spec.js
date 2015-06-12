@@ -1,4 +1,4 @@
-// import {data} from '../../js/spec.config'
+import {click, resolve} from '../../js/spec.config'
 
 describe('Test', () => {
     beforeEach(() => angular.mock.module('styleguideWeb'))
@@ -20,7 +20,6 @@ describe('Test', () => {
         }))
 
         it('Home', () => {
-            console.log(data)
             expect(ctrlAlias.home).toEqual('HOME')
         })
     })
