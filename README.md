@@ -1,5 +1,5 @@
-# Plantilla para iniciación de un proyecto. 
-# Guía de estilos para Jade, Stylus, JS(ES6)
+# Guía de estilos para Jade, Stylus, JavaScript(ES6)
+# Plantilla usando AngularJS
 
 ## Indice
   1. [Inicio](#inicio)
