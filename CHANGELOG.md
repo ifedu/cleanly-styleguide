@@ -1,4 +1,7 @@
-# 11/06/2015 v.0.1.0
+## 15/06/2015 v.0.1.1
+    - Documentado los requisitos para poder iniciar
+
+## 11/06/2015 v.0.1.0
     - Añadido a .gitignore public-dist/ y analysis/
     - Browserify para los tests
     - El watch en la tarea jade compila sólo el fichero afectado en lugar de todos
