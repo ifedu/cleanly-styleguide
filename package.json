@@ -1,17 +1,9 @@
 {
-  "name": "guide-style-cleanly",
-  "version": "0.1.1",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "gulp test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ifedu/styleguide-web"
-  },
-  "author": "",
-  "license": "BSD-2-Clause",
+  "name": "guide-style-cleanly",
+  "private": true,
+  "version": "0.1.1",
+
   "devDependencies": {
     "browserify": "^10.2.0",
     "connect-livereload": "^0.5.3",
