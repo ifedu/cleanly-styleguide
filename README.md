@@ -55,6 +55,13 @@
     - Mongodb
         - Base de datos no relacional
 
+### Requisitos
+    node.js/io.js
+    git
+    por consola en la carpeta de nuestro proyecto escribir los siguientes comandos para instalar las dependencias:
+    - npm install
+    - bower install 
+
 ### Tareas de gulp
     - gulp run
         - Compila el proyecto en /dev y lo lanza
