@@ -1,4 +1,5 @@
 ## 15/06/2015 v.0.1.1
+    - Arreglos en las descripciones de bower.json y package.json
     - Documentado los requisitos para poder iniciar
 
 ## 11/06/2015 v.0.1.0
