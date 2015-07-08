@@ -30,7 +30,7 @@ module.exports = function ($) {
     });
 
     $.gulp.task('compiledBase', function (cb) {
-        $.runSequence('clean', ['scripts', 'stylus', 'jade'], 'copy', 'templateCache', cb);
+        $.runSequence('clean', 'scripts', ['stylus', 'jade'], 'copy', 'templateCache', 'watch', cb);
     });
 
     // CODE
@@ -44,7 +44,7 @@ module.exports = function ($) {
 
     // DIST
     $.gulp.task('compiledDist', function (cb) {
-        $.runSequence('clean', ['scripts', 'stylus-min', 'jade-min'], 'copy', 'templateCache', 'distTask', cb);
+        $.runSequence('clean', ['scripts', 'stylus-min', 'jade-min'], 'copy', 'templateCache-min', 'distTask', cb);
     });
 
     $.gulp.task('dist', function (cb) {

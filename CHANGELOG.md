@@ -1,3 +1,7 @@
+## 07/07/2015 v.0.1.2
+    - Unifica codigo de servers
+    - Usa la tarea watch para el livereload
+
 ## 15/06/2015 v.0.1.1
     - Arreglos en las descripciones de bower.json y package.json
     - Documentado los requisitos para poder iniciar
