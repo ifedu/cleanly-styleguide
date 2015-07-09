@@ -1,13 +1,22 @@
+const jsonData = {}
+
 $.gulp.task('jade-min', () =>
     $.gulp
     .src([
         `${$.dev.public}/**/*.jade`,
-        `!${$.dev.public}/**/mixins/*.jade`,
+        `!${$.dev.public}/**/_**/*.jade`,
+        `!${$.dev.public}/**/_*.jade`,
 
         `!${$.dev.guide}/**/*.jade`,
         `!${$.dev.public}/guide.jade`
     ])
-    .pipe($.data($.fn.jsonJade))
+    .pipe($.data((file) => {
+        const valueJson = $.fn.jsonJade(file)
+
+        $.extend(true, jsonData, valueJson)
+
+        return jsonData
+    }))
     .pipe($.jade({
         pretty: false
     }))
@@ -17,13 +26,13 @@ $.gulp.task('jade-min', () =>
     .pipe($.gulp.dest($.dist.public))
 )
 
-$.gulp.task('stylus-min', () =>
+$.gulp.task('styles-min', () =>
     $.gulp
-    .src(`${$.dev.stylus}/*.styl`)
-    .pipe($.stylus({
+    .src(`${$.dev.styles}/main.styl`)
+    .pipe($.styles({
         compress: true
     }))
-    .pipe($.gulp.dest($.dist.stylus))
+    .pipe($.gulp.dest($.dist.styles))
 )
 
 $.gulp.task('copyDeploy', (done) =>
@@ -37,10 +46,12 @@ $.gulp.task('copyDeploy', (done) =>
 
 $.gulp.task('addDependencies-dist', () =>
     $.gulp
-    .src(`./${$.dist.index}`)
+    .src(`${$.dist.public}/**/*.html`)
     .pipe($.wiredep({
         directory: $.dist.vendor,
-        exclude: ['angular-mocks']
+        exclude: ['angular-mocks'],
+
+        onError: () => {}
     }))
     .pipe($.gulp.dest($.dist.public))
 )
@@ -49,7 +60,7 @@ $.gulp.task('generateOneScriptFile', (done) => {
     const assets = $.useref.assets()
 
     return $.gulp
-    .src($.dist.index)
+    .src(`${$.dist.public}/**/*.html`)
     .pipe(assets)
     .pipe(assets.restore())
     .pipe($.useref())
@@ -81,7 +92,7 @@ $.gulp.task('clean-min', (cb) =>
 )
 
 $.gulp.task('templateCache-min', (done) =>
-    $.gulp.src([`${$.dist.public}/**/directives/**/*.html`])
+    $.gulp.src(`${$.dist.public}/**/directives/**/*.html`)
     .pipe($.templateCache('templates.js', {
         standalone: true
     }))

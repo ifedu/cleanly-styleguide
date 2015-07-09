@@ -3,7 +3,9 @@ $.gulp.task('addDependencies', () =>
     .src(`./${$.deploy.index}`)
     .pipe($.wiredep({
         directory: $.deploy.vendor,
-        exclude: ['angular-mocks']
+        exclude: ['angular-mocks'],
+
+        onError: () => {}
     }))
     .pipe($.gulp.dest($.deploy.public))
 )

@@ -1,14 +1,23 @@
+const jsonData = {}
+
 $.gulp.task('jade', () =>
     $.gulp
     .src([
         `${$.dev.public}/**/*.jade`,
-        `!${$.dev.public}/**/mixins/*.jade`,
+        `!${$.dev.public}/guide.jade`,
+        `!${$.dev.public}/**/_*.jade`,
+        `!${$.dev.public}/**/_**/**/*.jade`,
 
-        `!${$.dev.guide}/**/*.jade`,
-        `!${$.dev.public}/guide.jade`
+        `!${$.dev.guide}/**/*.jade`
     ])
     .pipe($.changed($.deploy.public, {extension: '.html'}))
-    .pipe($.data($.fn.jsonJade))
+    .pipe($.data((file) => {
+        const valueJson = $.fn.jsonJade(file)
+
+        $.extend(true, jsonData, valueJson)
+
+        return jsonData
+    }))
     .pipe($.jade({
         pretty: true
     }))

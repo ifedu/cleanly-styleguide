@@ -1,17 +1,14 @@
 angular
 .module('styleguideWeb')
-.provider('lazyLoader', () => {
-    return {
-        add(resources) {
-            return ($q) => {
-                let deferred = $q.defer()
+.provider('lazyLoader', function () {
+    this.add = (resources) =>
+        ['$q', ($q) => {
+            let deferred = $q.defer()
 
-                $script(resources, () => deferred.resolve())
+            $script(resources, () => deferred.resolve())
 
-                return deferred.promise
-            }
-        },
+            return deferred.promise
+        }]
 
-        $get() {}
-    }
+    this.$get = () => {}
 })

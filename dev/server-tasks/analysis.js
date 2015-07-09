@@ -10,10 +10,10 @@ $.gulp.task('plato', () => {
     const plato = require('plato')
 
     const FILES = [
-        'deploy/public/app/**/*',
-        'deploy/public/js/**/*',
-        'deploy/server/**/*',
-        'deploy/server-tasks/**/*'
+        '_deploy/public/app/**/*',
+        '_deploy/public/js/**/*',
+        '_deploy/server/**/*',
+        '_deploy/server-tasks/**/*'
     ]
 
     const OPTIONS = {

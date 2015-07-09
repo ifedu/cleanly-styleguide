@@ -1,4 +1,4 @@
-$.gulp.task('clean', (cb) =>
+$.gulp.task('clean', (cb) => {
     $.del([
         $.deploy.public,
         $.deploy.tmp,
@@ -6,4 +6,13 @@ $.gulp.task('clean', (cb) =>
     ], {
         force: true
     }, cb)
-)
+})
+
+$.gulp.task('clean-scripts', (cb) => {
+    $.del([
+        `${$.deploy.public}/**/_*.js`,
+        `${$.deploy.public}/**/_**`
+    ], {
+        force: true
+    }, cb)
+})

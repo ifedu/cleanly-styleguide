@@ -16,16 +16,16 @@ script(src='guide/main.js')
 
     .row(ng-if='guideCtrl.selection === "js-directives"')
         .col-12.text-center JS Directives
-        include mixins/js-directives
+        include _mixins/js-directives
 
     .row(ng-if='guideCtrl.selection === "js-filters"')
         .col-12.text-center JS Filters
-        include mixins/js-filters
+        include _mixins/js-filters
 
     .row(ng-if='guideCtrl.selection === "jade-mixins"')
         .col-12.text-center Jade Mixins
-        include mixins/jade-mixins
+        include _mixins/jade-mixins
 
     .row(ng-if='guideCtrl.selection === "css"')
         .col-12.text-center CSS
-        include mixins/css
+        include _mixins/css

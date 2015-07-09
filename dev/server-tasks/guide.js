@@ -3,8 +3,10 @@ $.gulp.task('jade-guide', () =>
     .src([
         `${$.dev.guide}/**/*.jade`,
         `${$.dev.public}/guide.jade`,
-        `!${$.dev.guide}/**/mixins/*.jade`
+        `!${$.dev.guide}/**/_*.jade`,
+        `!${$.dev.guide}/**/_*/**/*.jade`
     ])
+    .pipe($.changed($.dev.guide, {extension: '.html'}))
     .pipe($.data($.fn.jsonJade))
     .pipe($.jade({
         pretty: true
@@ -17,10 +19,7 @@ $.gulp.task('jade-guide', () =>
 
 $.gulp.task('scripts-js-guide', () =>
     $.gulp
-    .src([
-        `${$.dev.guide}/**/*.js`,
-        `!${$.dev.public}/guide.data.js`,
-    ])
+    .src(`${$.dev.guide}/**/*.js`)
     .pipe($.changed($.deploy.guide))
     .pipe($.wrap(
         `(function () {
@@ -34,18 +33,10 @@ $.gulp.task('scripts-js-guide', () =>
     .pipe($.gulp.dest($.deploy.guide))
 )
 
-$.gulp.task('scripts-js-guide-data', () =>
-    $.gulp
-    .src([`${$.dev.public}/guide.data.js`])
-    .pipe($.changed($.deploy.guide))
-    .pipe($.babel())
-    .pipe($.gulp.dest($.deploy.guide))
-)
-
-$.gulp.task('stylus-guide', () =>
+$.gulp.task('styles-guide', () =>
     $.gulp
     .src(`${$.dev.guide}/*.styl`)
-    .pipe($.stylus({
+    .pipe($.styles({
         linenos: true
     }))
     .pipe($.gulp.dest($.deploy.guide))
@@ -56,14 +47,16 @@ $.gulp.task('addDependencies-guide', () =>
     .src(`./${$.deploy.guideIndex}`)
     .pipe($.wiredep({
         directory: $.deploy.vendor,
-        exclude: ['angular-mocks']
+        exclude: ['angular-mocks'],
+
+        onError: () => {}
     }))
     .pipe($.gulp.dest($.deploy.public))
 )
 
 $.gulp.task('webserver-guide', () => require(`../../${$.deploy.server}/server-guide.js`)($))
 
-$.gulp.task('guideTask', (cb) => $.runSequence(['scripts-js-guide', 'scripts-js-guide-data', 'stylus-guide'], 'jade-guide', 'addDependencies-guide', 'webserver-guide', cb))
+$.gulp.task('guideTask', (cb) => $.runSequence(['scripts-js-guide', 'styles-guide'], 'jade-guide', 'addDependencies-guide', 'webserver-guide', cb))
 
 $.gulp.watch([
     `${$.dev.guide}/**/*.jade`,

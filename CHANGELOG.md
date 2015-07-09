@@ -1,3 +1,14 @@
+## 08/07/2015 v.0.2.0
+    - Actualizadas librerías de bower, actualizado a angular 1.4.2
+    - Actualizadas librerías de npm, añadida extend(rompía la aplicación su ausencia) y eliminadas algunas en desuso
+    - Al compilar se ignoran carpetas y ficheros que empiecen por _
+    - Bootstrap deja de copiarse a vendor puesto que ya se usaba en main.css
+    - Carpeta raíz server-tasks renombrada a server-tasks-es5
+    - Los ficheros  *.data.js usados para variables de Jade pasan a _*.js y ahora extienden un objeto global en lugar de tener uno nuevo por fichero.
+    - Servicio lazy.js ya no falla al minificarse
+    - Tarea y fichero stylus renombrado a styles para facilitar transición a sass o less
+    - Todas las carpetas(a excepción de node_modules) generadas empiezan por _
+
 ## 07/07/2015 v.0.1.2
     - Unifica codigo de servers
     - Usa la tarea watch para el livereload

@@ -1,4 +1,4 @@
-$.gulp.task('watch', () => {
+$.gulp.task('watch', () =>
     $.gulp.watch([`${$.deploy.public}/**/*`], (event) => {
         const FILE_NAME = $.path.relative(__dirname, event.path)
 
@@ -8,7 +8,7 @@ $.gulp.task('watch', () => {
             }
         })
     })
-})
+)
 
 $.gulp.watch([
     `${$.dev.public}/**/*.jade`,
@@ -16,12 +16,15 @@ $.gulp.watch([
 ], () => $.runSequence('jade', 'templateCache', 'addDependencies'))
 
 $.gulp.watch([
-    `${$.dev.public}/app/**/*.js`,
-    `${$.dev.public}/js/**/*.js`,
-    `!${$.dev.public}/app/**/*.config.js`,
-    `!${$.dev.public}/app/**/*.spec.js`,
-    `!${$.dev.public}/js/**/*.config.js`,
-    `!${$.dev.public}/js/**/*.spec.js`
+    `${$.dev.public}/**/*.js`,
+    `!${$.dev.public}/**/*.config.js`,
+    `!${$.dev.public}/**/*.spec.js`
 ], ['scripts'])
-$.gulp.watch(`${$.dev.public}/**/*.styl`, ['stylus'])
+
+$.gulp.watch([
+    `${$.dev.public}/**/*.styl`,
+    `!${$.dev.guide}/**/*.styl`
+], ['styles'])
+
+$.gulp.watch(`${$.dev.guide}/**/*.styl`, ['styles-guide'])
 $.gulp.watch(`${$.dev.serverTasks}/*.js`, ['compile'])

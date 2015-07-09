@@ -7,7 +7,7 @@ module.exports = ($) => {
     // ROUTES
     app
     .use(require('connect-livereload')({port: PORT_RELOAD}))
-    .use($.express.static($.deploy.public))
+    .use($.express.static($.dist.public))
     .use('/*', (req, res) => res.sendFile($.path.resolve(__dirname, `../../${$.dist.public}`)))
     .use('/api', (req, res) =>
         req

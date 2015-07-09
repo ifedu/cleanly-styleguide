@@ -1,7 +1,6 @@
 $.gulp.task('scripts-js-test', () =>
     $.gulp
     .src([
-        `!${$.dev.public}/**/*.data.js`,
         `${$.dev.public}/**/*.config.js`,
         `${$.dev.public}/**/*.spec.js`,
 

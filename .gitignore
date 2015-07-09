@@ -1,7 +1,7 @@
 *.sublime-project
 *.sublime-workspace
-analysis/
-deploy/
+_analysis/
+_deploy/
+_public-dist/
+_vendor/
 node_modules/
-public-dist/
-vendor/

@@ -3,15 +3,19 @@ var $ = {
     changed: require('gulp-changed'),
     data: require('gulp-data'),
     del: require('del'),
+    express: require('express'),
+    extend: require('extend'),
     fs: require('fs'),
     gulp: require('gulp'),
     inject: require('gulp-inject'),
     jade: require('gulp-jade'),
     karma: require('karma').server,
     ngAnnotate: require('gulp-ng-annotate'),
+    open: require('open'),
     path:require('path'),
+    request: require('request'),
     runSequence: require('run-sequence'),
-    stylus: require('gulp-stylus'),
+    styles: require('gulp-stylus'),
     templateCache: require('gulp-angular-templatecache'),
     tinylr: require('tiny-lr')(),
     uglify: require('gulp-uglify'),
@@ -19,9 +23,9 @@ var $ = {
     wiredep: require('wiredep').stream,
     wrap: require('gulp-wrap'),
 
-    plato: './analysis/plato',
-    serverTasks: './server-tasks',
-    vendor: './vendor',
+    plato: './_analysis/plato',
+    serverTasks: './server-tasks-es5',
+    vendor: './_vendor',
 
     dev: {
         assets: './dev/public/assets',
@@ -29,33 +33,33 @@ var $ = {
         public: './dev/public',
         server: './dev/server',
         serverTasks: './dev/server-tasks',
-        stylus: './dev/public/styles'
+        styles: './dev/public/styles'
     },
 
     deploy: {
-        app: './deploy/public/app',
-        assets: './deploy/public/assets',
-        guide: './deploy/public/guide',
-        guideIndex: './deploy/public/guide.html',
-        index: './deploy/public/index.html',
-        js: './deploy/public/js',
-        public: './deploy/public',
-        server: './deploy/server',
-        serverTasks: './deploy/server-tasks',
-        stylus: './deploy/public/styles',
-        tmp: './deploy/tmp',
-        tmpJs: './deploy/tmp/js',
-        vendor: './deploy/public/vendor'
+        app: './_deploy/public/app',
+        assets: './_deploy/public/assets',
+        guide: './_deploy/public/guide',
+        guideIndex: './_deploy/public/guide.html',
+        index: './_deploy/public/index.html',
+        js: './_deploy/public/js',
+        public: './_deploy/public',
+        server: './_deploy/server',
+        serverTasks: './_deploy/server-tasks',
+        styles: './_deploy/public/styles',
+        tmp: './_deploy/tmp',
+        tmpJs: './_deploy/tmp/js',
+        vendor: './_deploy/public/vendor'
     },
 
     dist: {
-        allJs: './public-dist/js/all.js',
-        app: './public-dist/app',
-        index: './public-dist/index.html',
-        js: './public-dist/js',
-        public: './public-dist',
-        stylus: './public-dist/styles',
-        vendor: './public-dist/vendor'
+        allJs: './_public-dist/js/all.js',
+        app: './_public-dist/app',
+        index: './_public-dist/index.html',
+        js: './_public-dist/js',
+        public: './_public-dist',
+        styles: './_public-dist/styles',
+        vendor: './_public-dist/vendor'
     }
 };
 
@@ -67,9 +71,8 @@ $.fn = {
 
         var dirname = $.path.dirname(NAME);
 
-        dirname = dirname.replace($.path.sep + 'dev' + $.path.sep, $.path.sep + 'deploy' + $.path.sep);
-
-        var route = $.path.resolve(__dirname, dirname, FILEJADE + '.data.js');
+        dirname = dirname.replace($.path.sep + 'dev' + $.path.sep, $.path.sep + '_deploy' + $.path.sep);
+        var route = $.path.resolve(__dirname, dirname, '_' + FILEJADE + '.js');
 
         return ($.fs.existsSync(route)) ? require(route) : {};
     },

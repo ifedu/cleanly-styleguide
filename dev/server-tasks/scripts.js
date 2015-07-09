@@ -3,7 +3,6 @@ $.gulp.task('scripts-js', () =>
     .src([
         `${$.dev.public}/**/*.js`,
         `!${$.dev.public}/**/*.config.js`,
-        `!${$.dev.public}/**/*.data.js`,
         `!${$.dev.public}/**/*.spec.js`,
 
         `!${$.dev.guide}/**/*.js`
@@ -21,17 +20,6 @@ $.gulp.task('scripts-js', () =>
     .pipe($.gulp.dest($.deploy.public))
 )
 
-$.gulp.task('scripts-data', () =>
-    $.gulp
-    .src([
-        `${$.dev.public}/**/*.data.js`,
-        `!${$.dev.guide}/**/*.js`
-    ])
-    .pipe($.changed($.deploy.public))
-    .pipe($.babel())
-    .pipe($.gulp.dest($.deploy.public))
-)
-
 $.gulp.task('scripts-server', () =>
     $.gulp
     .src(`${$.dev.server}/**/*.js`)
@@ -40,4 +28,4 @@ $.gulp.task('scripts-server', () =>
     .pipe($.gulp.dest($.deploy.server))
 )
 
-$.gulp.task('scripts', (cb) => $.runSequence(['scripts-js', 'scripts-data', 'scripts-server'], cb))
+$.gulp.task('scripts', (cb) => $.runSequence(['scripts-js', 'scripts-server'], cb))

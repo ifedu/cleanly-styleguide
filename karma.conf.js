@@ -1,5 +1,5 @@
 module.exports = function (config) {
-    var $ = require('./config.js');
+    var $ = require('./server-tasks-es5/config.js');
 
     var configKarma = {
         basePath: $.deploy.public,

@@ -21,7 +21,7 @@ module.exports = function ($) {
     });
 
     $.gulp.task('readFolder', function () {
-        $.fn.readFolder($.deploy.serverTasks);
+        $.fn.readFolder('../' + $.deploy.serverTasks);
     });
 
     //// COMPILES
@@ -30,7 +30,7 @@ module.exports = function ($) {
     });
 
     $.gulp.task('compiledBase', function (cb) {
-        $.runSequence('clean', 'scripts', ['stylus', 'jade'], 'copy', 'templateCache', 'watch', cb);
+        $.runSequence('scripts', ['styles', 'jade'], 'copy', 'templateCache', 'clean-scripts', 'watch', cb);
     });
 
     // CODE
@@ -44,7 +44,7 @@ module.exports = function ($) {
 
     // DIST
     $.gulp.task('compiledDist', function (cb) {
-        $.runSequence('clean', ['scripts', 'stylus-min', 'jade-min'], 'copy', 'templateCache-min', 'distTask', cb);
+        $.runSequence('clean', 'scripts', ['styles-min', 'jade-min'], 'copy', 'templateCache-min', 'distTask', cb);
     });
 
     $.gulp.task('dist', function (cb) {
@@ -62,7 +62,7 @@ module.exports = function ($) {
 
     // RUN
     $.gulp.task('compiledRun', function (cb) {
-        $.runSequence('compiledBase', 'addDependencies', 'webserver', cb);
+        $.runSequence('clean', 'compiledBase', 'addDependencies', 'webserver', cb);
     });
 
     $.gulp.task('run', function (cb) {

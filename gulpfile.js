@@ -1,4 +1,4 @@
 'use strict';
 
-var $ = require('./config.js');
-$.fn.readFolder($.serverTasks);
+var $ = require('./server-tasks-es5/config.js');
+require($.serverTasks + '/public.js')($);
