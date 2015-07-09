@@ -4,6 +4,7 @@
     - Al compilar se ignoran carpetas y ficheros que empiecen por _
     - Bootstrap deja de copiarse a vendor puesto que ya se usaba en main.css
     - Carpeta raíz server-tasks renombrada a server-tasks-es5
+    - Fichero config.js movido a server-tasks-es5
     - Los ficheros  *.data.js usados para variables de Jade pasan a _*.js y ahora extienden un objeto global en lugar de tener uno nuevo por fichero.
     - Servicio lazy.js ya no falla al minificarse
     - Tarea y fichero stylus renombrado a styles para facilitar transición a sass o less
