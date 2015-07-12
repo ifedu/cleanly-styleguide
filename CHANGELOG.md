@@ -1,3 +1,6 @@
+## 12/07/2015 v.0.3.1
+    - Watch aplica para todos los styls
+
 ## 12/07/2015 v.0.3.0
     - Actualizado el readme con las distintas tareas disponibles y su funcionalidad
     - Eliminado guide.js y sus tareas
