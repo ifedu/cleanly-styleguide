@@ -23,7 +23,8 @@ $.gulp.watch(`${$.dev.public}/**/_*.js`, ['jade-script'])
 
 $.gulp.watch([
     `${$.dev.public}/**/*.styl`,
-    `!${$.dev.guide}/**/*.styl`
+    `!${$.dev.public}/**/_*.styl`,
+    `!${$.dev.public}/**/_**/**/*.styl`
 ], ['styles'])
 
 $.gulp.watch(`${$.dev.guide}/**/*.styl`, ['styles-guide'])
