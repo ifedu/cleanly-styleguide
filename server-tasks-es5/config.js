@@ -23,6 +23,8 @@ var $ = {
     wiredep: require('wiredep').stream,
     wrap: require('gulp-wrap'),
 
+    jsonData: {},
+
     plato: './_analysis/plato',
     serverTasks: './server-tasks-es5',
     vendor: './_vendor',
@@ -39,6 +41,7 @@ var $ = {
     deploy: {
         app: './_deploy/public/app',
         assets: './_deploy/public/assets',
+        dir: './_deploy',
         guide: './_deploy/public/guide',
         guideIndex: './_deploy/public/guide.html',
         index: './_deploy/public/index.html',
@@ -47,8 +50,6 @@ var $ = {
         server: './_deploy/server',
         serverTasks: './_deploy/server-tasks',
         styles: './_deploy/public/styles',
-        tmp: './_deploy/tmp',
-        tmpJs: './_deploy/tmp/js',
         vendor: './_deploy/public/vendor'
     },
 
@@ -72,9 +73,16 @@ $.fn = {
         var dirname = $.path.dirname(NAME);
 
         dirname = dirname.replace($.path.sep + 'dev' + $.path.sep, $.path.sep + '_deploy' + $.path.sep);
+
         var route = $.path.resolve(__dirname, dirname, '_' + FILEJADE + '.js');
 
-        return ($.fs.existsSync(route)) ? require(route) : {};
+        var data = ($.fs.existsSync(route)) ? require(route) : {};
+
+        delete require.cache[route];
+
+        $.extend(true, $.jsonData, data)
+
+        return $.jsonData;
     },
 
     readFolder: function (folder) {

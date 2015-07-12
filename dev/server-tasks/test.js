@@ -2,9 +2,7 @@ $.gulp.task('scripts-js-test', () =>
     $.gulp
     .src([
         `${$.dev.public}/**/*.config.js`,
-        `${$.dev.public}/**/*.spec.js`,
-
-        `!${$.dev.guide}/**/*.js`
+        `${$.dev.public}/**/*.spec.js`
     ])
     .pipe($.changed($.deploy.public))
     .pipe($.babel())
@@ -14,12 +12,10 @@ $.gulp.task('scripts-js-test', () =>
 $.gulp.task('karma', (done) =>
     $.karma.start({
         configFile: $.path.resolve(__dirname + '../../../karma.conf.js')
-    }, done)
+    }, () => done)
 )
 
 $.gulp.watch([
-    `${$.dev.app}/**/*.config.js`,
-    `${$.dev.app}/**/*.spec.js`,
-    `${$.dev.js}/**/*.config.js`,
-    `${$.dev.js}/**/*.spec.js`
-], () => $.runSequence('scripts-js-test'))
+    `${$.dev.public}/**/*.config.js`,
+    `${$.dev.public}/**/*.spec.js`
+], ['scripts-js-test'])

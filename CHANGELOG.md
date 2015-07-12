@@ -1,3 +1,21 @@
+## 12/07/2015 v.0.3.0
+    - Actualizado el readme con las distintas tareas disponibles y su funcionalidad
+    - Eliminado guide.js y sus tareas
+    - Eliminado livereload en server dist
+    - Fichero server-tasks/tasks.js donde vienen todas las llamadas que cada tarea hace a las que son compiladas posteriormente
+    - Ficheros guide.jade y _guide.js pasan a dev/public
+    - jsonData pasa a ser una propiedad de $ para estar global
+    - Karma ya no rompe al hacer callback en la última versión
+    - La guía ahora se comporta como los demás ficheros, a excepción de que la tarea dist la ignora
+    - Livereload funciona con todos los ficheros incluidos los _*.js
+    - Refactorizado el .data de las tareas jade
+    - Tarea addDependencies añade las librerías de bower a cualquier html y no sólo al index
+    - Tarea analysis cambiada a analize
+    - Tarea dist comprime todos los js y no sólo all.js
+    - Tarea dist borra todas las carpetas y ficheros que empiecen por _
+    - Tarea guide abre index.html y guide.html
+    - Tarea styles compila todos los ficheros menos los que empiecen por _ en lugar de sólo main
+
 ## 08/07/2015 v.0.2.0
     - Actualizadas librerías de bower, actualizado a angular 1.4.2
     - Actualizadas librerías de npm, añadida extend(rompía la aplicación su ausencia) y eliminadas algunas en desuso

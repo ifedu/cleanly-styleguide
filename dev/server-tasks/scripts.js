@@ -1,20 +1,14 @@
 $.gulp.task('scripts-js', () =>
     $.gulp
-    .src([
-        `${$.dev.public}/**/*.js`,
-        `!${$.dev.public}/**/*.config.js`,
-        `!${$.dev.public}/**/*.spec.js`,
-
-        `!${$.dev.guide}/**/*.js`
-    ])
+    .src(`${$.dev.public}/**/*.js`)
     .pipe($.changed($.deploy.public))
+    .pipe($.babel())
+    .pipe($.gulp.dest($.deploy.public))
     .pipe($.wrap(
         `(function () {
             <%= contents %>
         })();`
     ))
-    .pipe($.gulp.dest($.deploy.public))
-    .pipe($.babel())
     .pipe($.gulp.dest($.deploy.public))
     .pipe($.ngAnnotate())
     .pipe($.gulp.dest($.deploy.public))

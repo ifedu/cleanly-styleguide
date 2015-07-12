@@ -1,6 +1,4 @@
-const jsonData = {}
-
-$.gulp.task('jade-min', () =>
+$.gulp.task('jade-dist', () =>
     $.gulp
     .src([
         `${$.dev.public}/**/*.jade`,
@@ -10,13 +8,7 @@ $.gulp.task('jade-min', () =>
         `!${$.dev.guide}/**/*.jade`,
         `!${$.dev.public}/guide.jade`
     ])
-    .pipe($.data((file) => {
-        const valueJson = $.fn.jsonJade(file)
-
-        $.extend(true, jsonData, valueJson)
-
-        return jsonData
-    }))
+    .pipe($.data((file) => $.fn.jsonJade(file)))
     .pipe($.jade({
         pretty: false
     }))
@@ -26,7 +18,7 @@ $.gulp.task('jade-min', () =>
     .pipe($.gulp.dest($.dist.public))
 )
 
-$.gulp.task('styles-min', () =>
+$.gulp.task('styles-dist', () =>
     $.gulp
     .src(`${$.dev.styles}/main.styl`)
     .pipe($.styles({
@@ -69,29 +61,31 @@ $.gulp.task('generateOneScriptFile', (done) => {
 
 $.gulp.task('compress', () =>
     $.gulp
-    .src($.dist.allJs)
+    .src(`${$.dist.public}/**/*.js`)
     .pipe($.uglify())
-    .pipe($.gulp.dest($.dist.js))
+    .pipe($.gulp.dest($.dist.public))
 )
 
-$.gulp.task('compress-app', () =>
-    $.gulp
-    .src(`${$.dist.app}/**/*.js`)
-    .pipe($.uglify())
-    .pipe($.gulp.dest($.dist.app))
+$.gulp.task('clean-dist', (cb) =>
+    $.del([
+        $.deploy.public,
+        $.dist.public
+    ], FORCE, cb)
 )
 
 $.gulp.task('clean-min', (cb) =>
     $.del([
         `${$.dist.js}/**/*.js`,
         $.dist.vendor,
-        `!${$.dist.js}/all.js`
+        `!${$.dist.js}/all.js`,
+        `${$.dist.public}/**/_*`,
+        `${$.dist.public}/**/_**/**/*`
     ], {
         force: true
     }, cb)
 )
 
-$.gulp.task('templateCache-min', (done) =>
+$.gulp.task('templateCache-dist', (done) =>
     $.gulp.src(`${$.dist.public}/**/directives/**/*.html`)
     .pipe($.templateCache('templates.js', {
         standalone: true
@@ -101,4 +95,4 @@ $.gulp.task('templateCache-min', (done) =>
 
 $.gulp.task('webserver-dist', () => require(`../../${$.deploy.server}/server-dist.js`)($))
 
-$.gulp.task('distTask', (cb) => $.runSequence('copyDeploy', 'addDependencies-dist', 'generateOneScriptFile', ['compress', 'compress-app'], 'clean-min', 'webserver-dist', cb))
+$.gulp.task('distTask', (cb) => $.runSequence('generateOneScriptFile', 'compress', 'clean-min', cb))

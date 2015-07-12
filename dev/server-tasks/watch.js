@@ -10,16 +10,16 @@ $.gulp.task('watch', () =>
     })
 )
 
-$.gulp.watch([
-    `${$.dev.public}/**/*.jade`,
-    `!${$.dev.public}/guide.jade`
-], () => $.runSequence('jade', 'templateCache', 'addDependencies'))
+$.gulp.watch(`${$.dev.public}/**/*.jade`, () => $.runSequence('jade', 'templateCache', 'addDependencies'))
 
 $.gulp.watch([
     `${$.dev.public}/**/*.js`,
+    `!${$.dev.public}/**/_*.js`,
     `!${$.dev.public}/**/*.config.js`,
     `!${$.dev.public}/**/*.spec.js`
 ], ['scripts'])
+
+$.gulp.watch(`${$.dev.public}/**/_*.js`, ['jade-script'])
 
 $.gulp.watch([
     `${$.dev.public}/**/*.styl`,

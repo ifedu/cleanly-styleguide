@@ -3,7 +3,7 @@ link(
     rel="stylesheet"
 )
 
-include ../index
+include index
 
 script(src='guide/main.js')
 
@@ -16,16 +16,16 @@ script(src='guide/main.js')
 
     .row(ng-if='guideCtrl.selection === "js-directives"')
         .col-12.text-center JS Directives
-        include _mixins/js-directives
+        include guide/_mixins/js-directives
 
     .row(ng-if='guideCtrl.selection === "js-filters"')
         .col-12.text-center JS Filters
-        include _mixins/js-filters
+        include guide/_mixins/js-filters
 
     .row(ng-if='guideCtrl.selection === "jade-mixins"')
         .col-12.text-center Jade Mixins
-        include _mixins/jade-mixins
+        include guide/_mixins/jade-mixins
 
     .row(ng-if='guideCtrl.selection === "css"')
         .col-12.text-center CSS
-        include _mixins/css
+        include guide/_mixins/css

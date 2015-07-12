@@ -63,14 +63,16 @@
     - bower install 
 
 ### Tareas de gulp
-    - gulp run
-        - Compila el proyecto en /dev y lo lanza
-    - gulp guide
-        - Compila el proyecyo y la guía en /dev y /guide y lanza la guía
-    - gulp test
-        - Compila el proyecto y lanza los test unitarios
+    - gulp analize
+        - Hace la tarea run y analiza la complejidad del código js con plato
     - gulp dist
-        - Minifica el proyecto en /dist y lo lanza
+        - Minifica el proyecto dev a _public-dist y lo lanza
+    - gulp guide
+        - Igual que run pero lanza también guide.html en un server aparte
+    - gulp run
+        - Compila el proyecto dev a _deploy y lo lanza
+    - gulp test
+        - Hace la tarea run y lanza los test unitarios
 
 **[Indice](#indice)**
 

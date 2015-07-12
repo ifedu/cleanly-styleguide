@@ -10,13 +10,13 @@ module.exports = function ($) {
     $.gulp.task('compileGulpEs6', function (cb) {
         return $.gulp.src($.dev.serverTasks + '/*.js')
         .pipe($.changed($.deploy.serverTasks))
+        .pipe($.babel())
+        .pipe($.gulp.dest($.deploy.serverTasks))
         .pipe($.wrap(
             'module.exports = function ($) {' +
                 '<%= contents %>' +
             '};'
         ))
-        .pipe($.gulp.dest($.deploy.serverTasks))
-        .pipe($.babel())
         .pipe($.gulp.dest($.deploy.serverTasks));
     });
 
@@ -29,49 +29,42 @@ module.exports = function ($) {
         $.runSequence('deleteGulp', 'compileGulpEs6', 'readFolder', cb);
     });
 
-    $.gulp.task('compiledBase', function (cb) {
-        $.runSequence('scripts', ['styles', 'jade'], 'copy', 'templateCache', 'clean-scripts', 'watch', cb);
+    // TASKS ES6
+    $.gulp.task('compiledAnalize', function (cb) {
+        $.runSequence('analize-es6', cb);
     });
 
-    // CODE
-    $.gulp.task('compiledAnalysis', function (cb) {
-        $.runSequence('compiledBase', 'addDependencies', 'analize', cb);
-    });
-
-    $.gulp.task('analysis', function (cb) {
-        $.runSequence('compile', 'compiledAnalysis', cb);
-    });
-
-    // DIST
     $.gulp.task('compiledDist', function (cb) {
-        $.runSequence('clean', 'scripts', ['styles-min', 'jade-min'], 'copy', 'templateCache-min', 'distTask', cb);
+        $.runSequence('dist-es6');
+    });
+
+    $.gulp.task('compiledGuide', function (cb) {
+        $.runSequence('guide-es6', cb);
+    });
+
+    $.gulp.task('compiledRun', function (cb) {
+        $.runSequence('run-es6', cb);
+    });
+
+    $.gulp.task('compiledTest', function (cb) {
+        $.runSequence('test-es6', cb);
+    });
+
+    // TASKS
+    $.gulp.task('analize', function (cb) {
+        $.runSequence('compile', 'compiledAnalize', cb);
     });
 
     $.gulp.task('dist', function (cb) {
         $.runSequence('compile', 'compiledDist', cb);
     });
 
-    // GUIDE
-    $.gulp.task('compiledGuide', function (cb) {
-        $.runSequence('compiledBase', 'guideTask', cb);
-    });
-
     $.gulp.task('guide', function (cb) {
-        $.runSequence('compile', 'compiledGuide', cb);
-    });
-
-    // RUN
-    $.gulp.task('compiledRun', function (cb) {
-        $.runSequence('clean', 'compiledBase', 'addDependencies', 'webserver', cb);
+        $.runSequence('run', 'compiledGuide', cb);
     });
 
     $.gulp.task('run', function (cb) {
         $.runSequence('compile', 'compiledRun', cb);
-    });
-
-    // TEST
-    $.gulp.task('compiledTest', function (cb) {
-        $.runSequence('compiledBase', 'addDependencies', 'scripts-js-test', 'karma', cb);
     });
 
     $.gulp.task('test', function (cb) {
