@@ -11,9 +11,13 @@ module.exports = function (config) {
 
         browsers: ['PhantomJS'],
 
-        exclude: [],
+        exclude: [
+            '**/_**/**/*.js',
+            '**/_*.js'
+        ],
 
         files: [
+            'js/vendor/jquery-1.11.3.min.js',
             'vendor/angular/angular.js',
             'vendor/angular-ui-router/release/angular-ui-router.min.js',
             'vendor/angular-mocks/angular-mocks.js',
@@ -24,10 +28,7 @@ module.exports = function (config) {
             'js/constants.js',
             'js/controllers/parent.controller.js',
             'js/services/*.js',
-            'js/**/*.js',
-            'app/**/*.js',
-            'app/**/*.html',
-            'js/directives/**/*.html'
+            '**/*.js'
         ],
 
         frameworks: [
@@ -43,10 +44,8 @@ module.exports = function (config) {
         ],
 
         preprocessors: {
-            'app/**/*spec.js': ['browserify'],
-            'app/**/*config.js': ['browserify'],
-            'js/**/*spec.js': ['browserify'],
-            'js/**/*config.js': ['browserify']
+            '**/*spec.js': ['browserify'],
+            '**/*config.js': ['browserify']
         }
     };
 

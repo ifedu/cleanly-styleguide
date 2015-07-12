@@ -2,7 +2,7 @@
   "description": "",
   "name": "guide-style-cleanly",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "devDependencies": {
     "browserify": "^10.2.4",
     "connect-livereload": "^0.5.3",
