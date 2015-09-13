@@ -1,5 +1,20 @@
-## 12/07/2015 v.0.3.1
+## 13/09/2015 v.0.4.0
+    - Actualizados los ficheros config.js y public.js a ES6, eliminadas las tareas que permitian usar babeljs en las tareas de dev/server-tasks compilando y leyendo posteriormente
+    - config.js movido al raíz del proyecto
+    - dev/server.js a server.js
+    - Eliminado bower, ahora las dependencias de front están fijas en la carpeta vendor de dev
+    - Eliminada la tarea de la guía
+    - Eliminada la carpeta apps, mixins sacados al raíz de public
+    - Eliminadas todas las tareas de compilado de ES6 a ES5 en la parte de Node.js
+    - Eliminado addDependencies, addDependencies-dist y por tanto módulo wiredep de npm, y el mixin script-min
+    - ficheros en dev/public pasados a dev
+    - server-tasks-es5 pasa a tasks, las tareas de dev/server-tasks pasan a tasks 
+    - Uso de ES6 en Node.js
     - Watch aplica para todos los styls
+    - README
+        - Eliminado Bower
+        - Eliminada tarea para la guía
+        - Requisito Node.js 4.0 o superior
 
 ## 12/07/2015 v.0.3.0
     - Actualizado el readme con las distintas tareas disponibles y su funcionalidad

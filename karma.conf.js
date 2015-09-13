@@ -1,8 +1,8 @@
 module.exports = function (config) {
-    var $ = require('./server-tasks-es5/config.js');
+    const $ = require('./config.js')
 
-    var configKarma = {
-        basePath: $.deploy.public,
+    const configKarma = {
+        basePath: $.deploy.dir,
         singleRun: true,
 
         browserify: {
@@ -17,18 +17,15 @@ module.exports = function (config) {
         ],
 
         files: [
-            'js/vendor/jquery-1.11.3.min.js',
             'vendor/angular/angular.js',
             'vendor/angular-ui-router/release/angular-ui-router.min.js',
             'vendor/angular-mocks/angular-mocks.js',
             'vendor/script.js/dist/script.min.js',
-            'js/index.spec.js',
-            'js/templates.js',
             'js/index.js',
-            'js/constants.js',
-            'js/controllers/parent.controller.js',
+            'js/controllers/parent.ctrl.js',
             'js/services/*.js',
-            '**/*.js'
+            'js/**/*.js',
+            'views/**/*.js'
         ],
 
         frameworks: [
@@ -47,10 +44,10 @@ module.exports = function (config) {
             '**/*spec.js': ['browserify'],
             '**/*config.js': ['browserify']
         }
-    };
+    }
 
     // configKarma.browsers = ['Chrome'];
     // configKarma.singleRun = false;
 
-    config.set(configKarma);
-};
+    config.set(configKarma)
+}

@@ -1,8 +1,8 @@
 {
   "description": "",
-  "name": "guide-style-cleanly",
+  "name": "styleguide-web",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "devDependencies": {
     "browserify": "^10.2.4",
     "connect-livereload": "^0.5.3",
@@ -36,7 +36,6 @@
     "request": "^2.58.0",
     "run-sequence": "^1.1.1",
     "scriptjs": "^2.5.7",
-    "tiny-lr": "^0.1.6",
-    "wiredep": "^3.0.0-beta"
+    "tiny-lr": "^0.1.6"
   }
 }

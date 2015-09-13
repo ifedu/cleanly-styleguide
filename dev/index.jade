@@ -1,0 +1,40 @@
+include _mixins/main
+doctype html
+html(
+    lang='es'
+    ng-app='styleguideWeb'
+    ng-controller='ParentCtrl as parentCtrl'
+)
+    head
+        meta(charset='utf-8')
+        title Styleguide Web
+        meta(
+            content=''
+            name='description'
+        )
+        //- link(
+        //-     href='favicon.ico'
+        //-     rel='shortcut icon'
+        //- )
+        link(
+            href='styles/main.css'
+            rel='stylesheet'
+        )
+    body
+        .main
+            +example(hello)
+
+            div parentCtrl.hello = {{ parentCtrl.hello }}
+
+            div(ui-view)
+
+        +script-min-ini()
+        +script-min('vendor/angular/angular.js')
+        +script-min('vendor/angular-ui-router/release/angular-ui-router.js')
+        +script-min('vendor/script.js/src/script.js')
+
+        +script-min('js/index.js')
+        +script-min('js/services/lazy.js')
+        +script-min('js/controllers/parent.ctrl.js')
+        +script-min('views/home/routes.js')
+        +script-min-end()

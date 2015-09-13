@@ -56,19 +56,16 @@
         - Base de datos no relacional
 
 ### Requisitos
-    node.js/io.js
+    node.js 4.0 o superior
     git
     por consola en la carpeta de nuestro proyecto escribir los siguientes comandos para instalar las dependencias:
     - npm install
-    - bower install 
 
 ### Tareas de gulp
     - gulp analize
         - Hace la tarea run y analiza la complejidad del código js con plato
     - gulp dist
-        - Minifica el proyecto dev a _public-dist y lo lanza
-    - gulp guide
-        - Igual que run pero lanza también guide.html en un server aparte
+        - Minifica el proyecto dev a _public-dist y lo lanzaç
     - gulp run
         - Compila el proyecto dev a _deploy y lo lanza
     - gulp test
