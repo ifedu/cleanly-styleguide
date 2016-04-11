@@ -2,7 +2,7 @@
   "description": "",
   "name": "styleguide-web",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "devDependencies": {
     "browserify": "^10.2.4",
     "connect-livereload": "^0.5.3",

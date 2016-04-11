@@ -12,14 +12,16 @@ module.exports = ($) => {
         .pipe($.gulp.dest($.deploy.dir))
     )
 
-    $.gulp.task('karma', (done) =>
+    $.gulp.task('karma', (done) => {
         $.karma.start({
             configFile: $.path.resolve(__dirname, '../karma.conf.js')
         }, () => done)
-    )
 
-    $.gulp.watch([
-        `${$.dev.dir}/**/*.config.js`,
-        `${$.dev.dir}/**/*.spec.js`
-    ], ['scripts-js-test'])
+        setTimeout(() => {
+            $.gulp.watch([
+                `${$.dev.dir}/**/*.config.js`,
+                `${$.dev.dir}/**/*.spec.js`
+            ], ['scripts-js-test'])
+        }, 2000)
+    })
 }

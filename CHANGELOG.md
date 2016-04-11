@@ -1,3 +1,6 @@
+## 11/04/2016 v.0.4.1
+    - Usa gulp.watch de forma asíncrona reduciendo el tiempo de compilados.
+
 ## 13/09/2015 v.0.4.0
     - Actualizados los ficheros config.js y public.js a ES6, eliminadas las tareas que permitian usar babeljs en las tareas de dev/server-tasks compilando y leyendo posteriormente
     - config.js movido al raíz del proyecto
