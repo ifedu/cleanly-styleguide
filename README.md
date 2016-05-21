@@ -1,5 +1,4 @@
 ### v.0.5.0
-# Plantilla usando AngularJS
 
 ## Indice
   1. [Inicio](#inicio)
