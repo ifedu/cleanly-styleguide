@@ -1,3 +1,6 @@
+## 11/04/2016 v.0.5.0
+    - Eliminado todos los archivos para dejarlo sólo como guía de estilos, en su lugar usa https://www.npmjs.com/package/generator-speedseed
+
 ## 11/04/2016 v.0.4.1
     - Usa gulp.watch de forma asíncrona reduciendo el tiempo de compilados.
 

@@ -1,4 +1,4 @@
-# Guía de estilos para Jade, Stylus, JavaScript(ES6)
+### v.0.5.0
 # Plantilla usando AngularJS
 
 ## Indice
@@ -226,8 +226,8 @@ let persona = {
 **[Indice](#indice)**
 
 ## Jade
-- Elemento con varios atributos: Si son varios se escribe un atributo en cada línea sin , de separación y ordenados alfabéticamente.
-  > ¿Por qué? Ayuda a localizar de un vistazo los atributos, no poner ',' lo hace más fiel a la sintaxis html y fácil de ordenar para evitar tener repetidos así como localizarlos más fácilmente
+- Elemento con varios atributos: Si son varios se escribe un atributo en cada línea, incluye atributo en la línea de la etiqueta y paretesís de cierre en el último atributo. Sin , de separación y ordenados alfabéticamente.
+  > ¿Por qué? Ayuda a localizar de un vistazo los atributos, no poner ',' lo hace más fiel a la sintaxis html y fácil de ordenar para evitar tener repetidos
 
 - div omitido si hay class.
   > ¿Por qué? No aporta nada ponerlos
@@ -248,7 +248,7 @@ let persona = {
 //-MAL
 div.container
     div(class='lolo')
-        input(class='myInput' type='text' value='valor')
+        input(class='myInput' type='text' value='valor' ng-model='lala')
     header(class='main-header')
         a(href='/')
             | Project Title
@@ -256,10 +256,10 @@ div.container
 //-BIEN
 .container
     .lolo
-        input.myInput(
+        input.myInput(ng-model='lala'
             type='text'
-            value='valor'
-        )
+            value='valor')
+
     header.main-header
         a(href='/') Project Title
 ```
@@ -308,10 +308,42 @@ else
     option(value=value)= name
 
 //-BIEN
-option(
-    selected=selected
-    value=value
-)= name
+option(selected=selected
+    value=value)= name
+```
+
+- Espacio vertical cada vez que acabamos un anidamiento.
+  > ¿Por qué? Hace el código más legible
+
+```html
+//-MAL
+div a
+div b
+    div b-1
+    div b-2
+    div b-3
+div c
+    div c-1
+        div c-2-1
+        div c-2-2
+    div c-2
+div d
+
+//-BIEN
+div a
+div b
+    div b-1
+    div b-2
+    div b-3
+
+div c
+    div c-1
+        div c-2-1
+        div c-2-2
+
+    div c-2
+
+div d
 ```
 
 **[Indice](#indice)**
